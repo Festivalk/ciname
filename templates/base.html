@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}base{% endblock %}</title>
+    <link href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
+            <span class="sr-only">Switch navigation bar</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">UIC</a>
+        </div>
+         <div class="collapse navbar-collapse" id="my-nav">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            </ul>
+            </li>
+            <li class="active"><a href="/index_show/">Home</a></li>
+            <li class="active"><a href="/film/">Films</a> </li>
+            <li class="active"><a href="/cinema/">Cinemas</a> </li>
+            <li class="active"><a href="/recommendations/">Daily Recommendations</a> </li>
+          </ul>
+         <form class="navbar-form navbar-left" method="POST" action="/film_search/">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="text">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+             <select name="searchby" style="margin-left: 10px">
+                 <option value="title">Film_name</option>
+                 <option value="language">Film_language</option>
+                 <option value="region">Film_region</option>
+                 <option value="type">Type</option>
+                 <option value="directer">Directer</option>
+             </select>
+        </form>
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.session.is_login %}
+                  <li><a href="#">currently online ：{{ request.session.user_name }}</a></li>
+                  <li><a href="/logout/">exit</a></li>
+              {% else %}
+                  <li><a href="/login/">login</a></li>
+                  <li><a href="/register/">register</a></li>
+              {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block content %}{% endblock %}
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

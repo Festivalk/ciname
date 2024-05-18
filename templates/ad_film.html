@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load static %}
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Films</title>
+    <link rel="stylesheet" href="/static/css/index.css"/>
+    <script src="/static/js/table.js"></script>
+    <link rel="stylesheet" href="/static//css/Normal flow.css">
+    <link rel="stylesheet" href="/static//css/cinema.css">
+    <link rel="stylesheet" href="/static//css/common.css">
+</head>
+
+<style type="text/css">
+    .login {
+        background-color: white;
+        border: 2px solid #ff2351;
+        border-radius: 8px;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+    .login:hover {
+        background-color: #ff2351;
+        color: white;
+    }
+    li {
+{#        {% comment %} list-style-type: none;  {% endcomment %}#}
+        display : inline;
+    }
+    table {
+        width: 98%; /* 表格宽度 */
+        text-align: left;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 0.5px solid #d5d2d2;
+        border-spacing: 10px 5px;
+        border-collapse: separate;
+        margin-left:5px;
+        margin-right: 5px;
+    }
+    .del {
+        border: lightyellow;
+      display: inline-block;
+      padding: 1rem 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 0.5px;
+      text-align: center;
+      border-radius: 2rem;
+      background-color: rgba(250, 81, 35, 0.63);
+      color: #ffffff;
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+      transition: all .2s ease-in-out;
+      margin: 1px;
+    }
+    .select{
+        border: lightyellow;
+      display: inline-block;
+      padding: 1rem 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 0.5px;
+      text-align: center;
+      border-radius: 2rem;
+      background-color: rgb(255, 255, 255);
+      color: #ffffff;
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+      transition: all .2s ease-in-out;
+      margin: 1px;
+    }
+    .show{
+        border: lightyellow;
+      display: inline-block;
+      padding: 1rem 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 0.5px;
+      text-align: center;
+      border-radius: 2rem;
+      background-color: #ffaa3e;
+      color: #ffffff;
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+      transition: all .2s ease-in-out;
+      margin: 1px;
+    }
+    .show:hover{
+        background-color: #fccd71; /* 按钮背景颜色 */
+        color: white;
+    }
+    .del:hover{
+        background-color: #ff5b1f; /* 按钮背景颜色 */
+        color: white;
+    }
+    .select:hover {
+        background-color: #ff2351;
+        color: white;
+    }
+
+</style>
+<!-- 导航栏 -->
+<div class="nav">
+        <div class="typeArea">
+            <div class="loc">
+                <div class="location">Admin</div>
+                <div class="triangle"></div>
+            </div>
+            <ul>
+                <li class="selected"><a href="/ad_film/">Films</a></li>
+                <li><a href="/ad_cinemas/">Cinemas</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <table style="padding: 10px">
+        <thead><h1>&nbsp;  Films List</h1></thead>
+
+        <tbody>
+        {% for obj in flist %}
+            <tr><td>{{obj.title}}</td>
+                <td><a href="/ad_film/show_film?film_id={{obj.film_id}}" button class="show">Show Detail</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+
+</body>
+</html>
