@@ -1,0 +1,33 @@
+{% if request.session.is_login %}
+    <h1>hello,{{ request.session.user_name }}!welcome back！</h1>
+{% else %}
+    <h1>You are not logged in yet and can only access public content！</h1>
+{% endif %}
+
+if (isset($_POST['submitReview'])) {
+    if (isset($_SESSION['account_name'])) {
+        $userID = $_SESSION['user_id'];
+        $movieID = $_SESSION['film_id'];
+        $checkSubmittedReview = mysqli_query($link, "SELECT * FROM User_reviews WHERE User_ID='$userID' && film_id='$movieID'");
+        if (mysqli_num_rows($checkSubmittedReview) == 1) {
+            header('refresh:10; film_detail.php?film_id=' . $movieID);
+            echo "<div style='font:20px sans-serif;'>You've already submitted a review!</div><br></br>";
+            echo "<div style='font:20px sans-serif;'>You can only submit one review per movie!</div><br></br>";
+            echo "<div style='font:20px sans-serif;'>Redirecting to movie page in 10 seconds...!</div><br></br>";
+        } else {
+            $rating = mysqli_escape_string($link, $_POST['rating']);
+            $comment = mysqli_escape_string($link, $_POST['review']);
+            $insertReview = mysqli_query($link, "INSERT INTO User_reviews (User_ID, film_id, Rating, Comment) VALUES ('$userID', '$movieID', '$rating', '$comment')");
+            header('location: film_detail.php?film_id=' . $movieID);
+        }
+    } else {
+        echo "<div style='font:20px sans-serif;'>You must login to comment!</div><br></br>";
+        echo "<div style='font:20px sans-serif;'>Redirecting to movie page in 5 seconds...!</div><br></br>";
+    }
+} else {
+    echo "<div style='font:20px sans-serif;'>ERROR: Someting went wrong!</div><br></br>";
+    echo mysqli_error($link);
+
+}
+mysqli_close($link);
+?>
