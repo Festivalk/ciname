@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load const %}
+
+<!DOCTYPE html>
+{% block content %}
+<style>
+.webmain .leftside .hot .movies a {
+    float: left;
+    margin-top: 30px;
+    margin-left: 29px;
+    width: 160px;
+    border: 1px solid #d8d8d8;
+}
+
+.webmain .leftside .hot .movies {
+    margin-top: -10px;
+}
+
+
+.webmain .leftside .hot .movies .first {
+    margin-left: 2px;
+}
+
+
+.webmain .leftside .hot .movies a div {
+    height: 39px;
+    font-size: 16px;
+    color: #ff2351;
+    line-height: 39px;
+    margin-left: 64px;
+}
+    .box{
+    float:left;
+    margin-top: 30px;
+    width: 740px;
+    background:
+            linear-gradient(to bottom,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) left top no-repeat,
+            linear-gradient(to right,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) left top no-repeat,
+            linear-gradient(to bottom,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) right top no-repeat,
+            linear-gradient(to left,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) right top no-repeat,
+            linear-gradient(to top,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) left bottom no-repeat,
+            linear-gradient(to right,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) left bottom no-repeat,
+            linear-gradient(to top,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) right bottom no-repeat,
+            linear-gradient(to left,#33cdfa 0px,#33cdfa 2px,transparent 3px,transparent 100%) right bottom no-repeat;
+    background-size: 1.5rem 1.5rem;
+    background-color: lightcyan;
+    padding:2px;
+}
+</style>
+    <!-- main -->
+    <div class="webmain">
+        <!-- left -->
+        <div class="leftside">
+            <div class="hot">
+                <div class="subtitle">
+                    <h2 style="color:#FF8800">Recommendation For You</h2>
+                </div>
+                <div class="movies" style='width:800px;justify-content: space-between; display: flex;'>
+                   {% for i in Top_5 %}
+                    <a href="/film/film_detail/?id={{ i.film_id }}" style='margin-left:60px; width: 202px'>
+                        <img src="/static/flim/{{ i.image }}" alt="hotFilmImg" width = "200px" height = "200px" />
+                        <div style="margin: 0 auto; color: black;"><p>{{ i.title|slice:":20" }}</p></div>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="box">
+                    <div class="rightside" style='float:left'>
+                        <h3 style="color:black;">Historical Viewing Records</h3>
+                        <div class="todayMoney">
+                            {% with c=0 %}
+                            {% for i in film %}
+                                {% plus c as c %}
+                                <ul style=" height: 50px;margin: 0;">
+                                <li><a href="/film/film_detail/?id={%find i  %}" style="text-decoration: none;">
+                                        <div class="num top3" >{{ c }}.{{ i }}</div>
+                                    </a></li>
+                                </ul>
+                            {% endfor %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightside">
+            <img src = "data:image/png;base64,{{ pieT }}" width = "520px" height = "420px" style="margin-top: 10px"/>
+            <img src = "data:image/png;base64,{{ pieR }}" alt="hotFilmImg" width = "520px" height = "420px"/>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load const %}
+{% block css %}
+    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+    <link rel="stylesheet" href="{% static 'css/film.css' %}">
+{% endblock %}
+{% block title %}Films{% endblock %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style type="text/css">
+    ul {
+    list-style-type: none;
+    }
+</style>
+
+<body>
+
+    <div class="main">
+        <!-- menu -->
+
+        <!--main-->
+        <div class="container">
+            <!-- classification -->
+            <div class="choose">
+                <div class="choose-item clearfix no-line">
+                    <div class="left">Type:</div>
+                    <div class="right clearfix">
+                        <ul>
+                            <li><a href="/film/" style="font-size: 14px">All</a></li>
+                                {% for i in film_type %}
+                                <li><a href="/film_search/?content=type,{{ i.type }}">{{ i.type }}</a></li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="choose-item clearfix">
+                    <div class="left">Area:</div>
+                    <div class="right clearfix">
+                        <ul>
+                            <li><a href="/film/" style="font-size: 14px">All</a></li>
+                                {% for i in film_region %}
+                                <li><a href="/film_search/?content=region,{{ i.region }}">{{ i.region }}</a></li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="choose-item clearfix">
+                    <div class="left">Year:</div>
+                    <div class="right clearfix">
+                        <ul>
+                            <li><a href="/film/" style="font-size: 14px">All</a></li>
+                            {% for i in fiml_year %}
+                            <li><a href="/film_search/?content=year,{{ i }}">{{i}}</a></li>
+                            {% endfor %}
+                            <li><a href="/film_search/?content=year,earlier">earlier</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="movies clearfix">
+               {% for i in page_obj %}
+                <div class="movies-item">
+                    <div class="img">
+                        <a href="/film/film_detail/?id={{ i.0 }}">
+                            <img src="/static/flim/{{ i.2 }}" alt="">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a href="/film/film_detail/?id={{ i.0 }}">
+                        {{ i.1 }}</a>
+                    </div>
+                    <div class="score">
+                        time: {{ i.3 }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- 分页 -->
+            <div class="pager">
+             {% if page_obj.has_previous %}
+             <a href="?page={{ page_obj.previous_page_number }}" class="pager-last">Last page</a>
+             {% endif %}
+             {% for num in page_obj.paginator.page_range %}
+             {% if num == page_obj.number %}
+             <a href="?page={{ num }}" class="pager-selected">{{ num }}</a>
+             {% else %}
+             <a href="?page={{ num }}">{{ num }}</a>
+             {% endif %}
+             {% endfor %}
+             {% if page_obj.has_next %}
+             <a href="?page={{ page_obj.next_page_number }}" class="pager-next">Next page</a>
+             {% endif %}
+             </div>
+            </div>
+                </div>
+            </body>
+            {% endblock %}

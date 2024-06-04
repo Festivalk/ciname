@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Cinema</title>
+    <link rel="stylesheet" href="/static/css/index.css"/>
+    <link rel="stylesheet" href="/static/css//table.css">
+    <script src="/static/js/table.js"></script>
+    <link rel="stylesheet" href="/static/css/cinema.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/order.css">
+</head>
+
+<style type="text/css">
+    .login {
+        background-color: white;
+        border: 2px solid #ff2351;
+        border-radius: 8px;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+    .login:hover {
+        background-color: #ff2351;
+        color: white;
+    }
+</style>
+<style>
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    {#text-decoration: none;#}
+    text-transform: capitalize;
+    transition:all .2s linear;
+}
+html::-webkit-scrollbar{
+    width:10rem;
+}
+section{
+    padding:2rem 7%;
+    margin:2px;
+}
+html::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.home .content p{
+    color:var(--text-color-2);
+    font-size: 50rem;
+    line-height: 1.7;
+    padding:1rem 0;
+}
+.del {
+        border: lightyellow;
+      display: inline-block;
+      padding: 1rem 0.5rem;
+      font-size: 1rem;
+      font-weight: 2;
+      line-height: 0.5px;
+      text-align: center;
+      border-radius: 2rem;
+      background-color: rgba(250, 81, 35, 0.63);
+      color: #ffffff;
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+      transition: all .2s ease-in-out;
+      margin: 1px;
+    }
+.del:hover{
+        background-color: #ff2351; /* 按钮背景颜色 */
+        color: white;
+    }
+</style>
+<body>
+<!-- 导航栏 -->
+<div class="nav">
+        <div class="typeArea">
+            <div class="loc">
+                <div class="location">Admin</div>
+                <div class="triangle"></div>
+            </div>
+            <ul>
+                <li class="selected"><a href="/ad_film/">Films</a></li>
+                <li><a href="/ad_cinemas/">Cinemas</a></li>
+                <li><a href="/ad_order/">Orders</a></li>
+            </ul>
+        </div>
+    </div>
+<!-- 导航栏结束 -->
+
+<!-- search -->
+<section class="home" id="home">
+    <p><b>search</b></p>
+             <div class="content" data-aos="fade-up">
+                <form method="post" action="/ad_order">
+                    {% csrf_token %}
+                    <select name="search" id = "s" style="width: 120px;height: 30px;color: #e83c3c"/>
+                        <option value="film">Film Title</option>
+                        <option value="username">Account Name</option><br>
+                        <input type="text" name="text" class="searchBox" placeholder = "  keyword"
+                                id = "w"
+                               style="width: 300px;height: 30px" class="search_input">
+                        <a href="/ad_order" button class="del" >Submit</a></th>
+
+                </form>
+
+            </div>
+</section>
+<table>
+    <thead>
+        <tr>
+            <th>Ticket</th>
+            <th>Account Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Title</th>
+            <th>SeatNum</th>
+            <th>operation</th>
+        </tr>
+    </thead>
+</table>
+</body>
+</html>

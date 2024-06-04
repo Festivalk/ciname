@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+{% load const %}
+<html>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/cinema.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+{% endblock %}
+{% block title %}Purchasing{% endblock %}
+<head lang="en">
+{% block content %}
+    <style type="text/css">
+    ul {
+    list-style-type: none;
+    }
+</style>
+<body>
+    <div class="title common clearfix">
+        <div>
+            <h2>Cinema List</h2>
+        </div>
+    </div>
+    {% for a in cinemaInfo %}
+        <div class="site common">
+            <div>
+                <a href="">{{a.name}}</a>
+                <p class="address">Address：{{a.address}}</p>
+            </div>
+
+            <div class="btn">
+                <a href="/cinema_detail/?cinema_id={{a.cinema_id}}&film_id={{ film_id }}">Buy ticket</a>
+            </div>
+        </div>
+    {% endfor %}
+
+
+</body>
+{% endblock %}
+</html>
